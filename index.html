@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV Analyzer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-table"></i> CSV Analyzer</h1>
+            <p>Upload a CSV file to analyze and extract column data</p>
+        </header>
+
+        <div class="upload-section">
+            <div class="upload-area" id="uploadArea">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <h3>Drop CSV file here or click to browse</h3>
+                <p>Supports .csv files only</p>
+                <input type="file" id="fileInput" accept=".csv" hidden>
+            </div>
+        </div>
+        <div class="controls" id="controls" style="display: none;">
+            <div class="header-option">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="hasHeaderCheckbox" checked>
+                    <span class="checkmark"></span>
+                    <i class="fas fa-heading"></i> First row contains headers
+                </label>
+            </div>
+
+            <div class="separator-selector">
+                <label for="separatorSelect">
+                    <i class="fas fa-cut"></i> Data Separator:
+                </label>
+                <select id="separatorSelect">
+                    <option value=";">Semicolon (;)</option>
+                    <option value=",">Comma (,)</option>
+                    <option value=":">Colon (:)</option>
+                </select>
+            </div>
+
+            <div class="column-selector">
+                <label for="columnSelect">
+                    <i class="fas fa-columns"></i> Select Column:
+                </label>
+                <select id="columnSelect">
+                    <option value="">Choose a column...</option>
+                </select>
+            </div>
+            <button id="extractBtn" class="btn-primary">
+                <i class="fas fa-extract"></i> Extract Data
+            </button>
+            <button id="resetBtn" class="btn-secondary">
+                <i class="fas fa-refresh"></i> Reset
+            </button>
+        </div>
+        <div class="results" id="results" style="display: none;">
+            <div class="results-header">
+                <h3><i class="fas fa-list"></i> Extracted Data</h3>
+                <button id="showControlsBtn" class="btn-controls" style="display: none;">
+                    <i class="fas fa-cog"></i> Show Controls
+                </button>
+            </div>
+
+            <div class="synthesis" id="synthesis" style="display: none;">
+                <h4><i class="fas fa-chart-bar"></i> Data Synthesis</h4>
+                <div class="synthesis-table-container">
+                    <table id="synthesisTable" class="synthesis-table">
+                        <thead>
+                            <tr>
+                                <th><i class="fas fa-tag"></i> Value</th>
+                                <th><i class="fas fa-hashtag"></i> Quantity</th>
+                                <th><i class="fas fa-edit"></i> Multiplier</th>
+                                <th><i class="fas fa-calculator"></i> Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="synthesisTableBody">
+                            <!-- Dynamic content will be inserted here -->
+                        </tbody>
+                        <tfoot>
+                            <tr class="totals-row">
+                                <td><strong>TOTALS</strong></td>
+                                <td id="totalQuantity">0</td>
+                                <td>-</td>
+                                <td id="grandTotal">0</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+            <div class="stats">
+                <span class="stat">
+                    <i class="fas fa-hashtag"></i>
+                    Total Records: <span id="totalCount">0</span>
+                </span>
+                <span class="stat">
+                    <i class="fas fa-check-circle"></i>
+                    Non-empty: <span id="nonEmptyCount">0</span>
+                </span>
+            </div>
+
+            <div class="data-container">
+                <div id="dataList"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
